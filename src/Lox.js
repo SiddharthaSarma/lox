@@ -23,8 +23,7 @@ class Lox {
   }
 
   run(src) {
-    // get the data from the scanner
-    scanner = new Scanner(src);
+    const scanner = new Scanner(src);
     const tokens = scanner.scanTokens();
 
     for (const token of tokens) {
