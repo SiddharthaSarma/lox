@@ -64,6 +64,13 @@ class Scanner {
       case '<':
         this.addToken(this.match('=') ? TokenType.LESS_EQUAL: TokenType.LESS);
         break;
+      case '/':
+        if (this.match('/')) {
+          // it is a comment
+          while(this.peek() !== '\n' && !this.isAtEnd()) this.advance();
+        } else {
+          this.addToken(TokenType.SLASH);
+        }
       default:
         // Lox.error(this.line, "Unexpected character");
         break;
