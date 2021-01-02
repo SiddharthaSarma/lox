@@ -18,7 +18,6 @@ class Lox {
     console.log('>>');
     stdin.addListener('data', data => {
       this.run(String(data));
-      console.log('>>')
     });
   }
 
