@@ -1,7 +1,7 @@
 const LEVELS = Object.freeze({
   INFO: 1,
   WARNING: 2,
-  ERROR: 3
+  ERROR: 3,
 });
 
 const COLORS_LIST = {
@@ -35,7 +35,7 @@ const COLORS_LIST = {
 const COLORS = {
   [LEVELS.INFO]: COLORS_LIST.FgBlue,
   [LEVELS.WARNING]: COLORS_LIST.FgYellow,
-  [LEVELS.ERROR]: COLORS_LIST.FgRed
+  [LEVELS.ERROR]: COLORS_LIST.FgRed,
 };
 
 const print = (msg, level) => {
@@ -52,9 +52,9 @@ const log = (msg, level, newLine) => {
     return;
   }
   print(msg, level);
-}
+};
 
 module.exports = {
   level: LEVELS,
-  log
+  log,
 };

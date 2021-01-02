@@ -1,6 +1,5 @@
-const Lox = require("./Lox");
-const TokenType = require("./TokenType");
-
+const Lox = require('./Lox');
+const TokenType = require('./TokenType');
 
 class Scanner {
   constructor(src) {
@@ -12,7 +11,7 @@ class Scanner {
   }
 
   scanTokens() {
-    while(!this.isAtEnd()) {
+    while (!this.isAtEnd()) {
       // we're beginning of next lexemme
       this.start = this.current;
       this.scanToken();
@@ -24,7 +23,7 @@ class Scanner {
   // identify the token
   scanToken() {
     const char = this.advance();
-    switch(char) {
+    switch (char) {
       case '(':
         this.addToken(TokenType.LEFT_PAREN);
         break;
@@ -53,21 +52,25 @@ class Scanner {
         this.addToken(TokenType.STAR);
         break;
       case '!':
-        this.addToken(this.match('=') ? TokenType.BANG_EQUAL: TokenType.BANG);
+        this.addToken(this.match('=') ? TokenType.BANG_EQUAL : TokenType.BANG);
         break;
       case '=':
-        this.addToken(this.match('=') ? TokenType.EQUAL_EQUAL: TokenType.EQUAL);
+        this.addToken(
+          this.match('=') ? TokenType.EQUAL_EQUAL : TokenType.EQUAL
+        );
         break;
       case '>':
-        this.addToken(this.match('=') ? TokenType.GREATER_EQUAL: TokenType.GREATER);
+        this.addToken(
+          this.match('=') ? TokenType.GREATER_EQUAL : TokenType.GREATER
+        );
         break;
       case '<':
-        this.addToken(this.match('=') ? TokenType.LESS_EQUAL: TokenType.LESS);
+        this.addToken(this.match('=') ? TokenType.LESS_EQUAL : TokenType.LESS);
         break;
       case '/':
         if (this.match('/')) {
           // it is a comment
-          while(this.peek() !== '\n' && !this.isAtEnd()) this.advance();
+          while (this.peek() !== '\n' && !this.isAtEnd()) this.advance();
         } else {
           this.addToken(TokenType.SLASH);
         }

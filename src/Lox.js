@@ -6,7 +6,7 @@ class Lox {
   runFile(path) {
     fs.readFile(path, (err, source) => {
       if (err) {
-        console.error("error reading file");
+        console.error('error reading file');
         return;
       }
       this.run(String(source));
@@ -16,7 +16,7 @@ class Lox {
 
   runPrompt() {
     console.log('>>');
-    stdin.addListener('data', data => {
+    stdin.addListener('data', (data) => {
       this.run(String(data));
     });
   }
