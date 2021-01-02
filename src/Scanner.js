@@ -80,6 +80,11 @@ class Scanner {
     }
   }
 
+  peek() {
+    if (this.isAtEnd()) return '\0';
+    return this.src.charAt(this.current);
+  }
+
   match(expectedChar) {
     if (this.isAtEnd()) return false;
     if (this.src.charAt(this.current) !== expectedChar) return false;
