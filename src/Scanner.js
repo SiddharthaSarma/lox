@@ -74,6 +74,16 @@ class Scanner {
         } else {
           this.addToken(TokenType.SLASH);
         }
+        break;
+      case ' ':
+      case '\r':
+      case '\t':
+        // Ignore whitespace.
+        break;
+
+      case '\n':
+        this.line++;
+        break;
       default:
         // Lox.error(this.line, "Unexpected character");
         break;
