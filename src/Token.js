@@ -10,3 +10,5 @@ class Token {
     return `${this.type} ${this.lexeme} ${this.literal}`;
   }
 }
+
+module.exports = Token;

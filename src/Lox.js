@@ -32,11 +32,12 @@ class Lox {
 
   main() {
     const args = process.argv;
-    if (args.length > 1) {
+    if (args.length > 3) {
       console.log('Usage lox [script]');
+      console.log(...args)
       process.exit(64);
-    } else if (args.length === 1) {
-      this.runFile(args[0]);
+    } else if (args.length === 3) {
+      this.runFile(args[2]);
     } else {
       this.runPrompt();
     }
