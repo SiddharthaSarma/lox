@@ -1,4 +1,6 @@
+const { isNumber } = require('util');
 const Lox = require('./Lox');
+const Token = require('./Token');
 const TokenType = require('./TokenType');
 
 class Scanner {
@@ -18,6 +20,24 @@ class Scanner {
     }
     this.tokens.push(new Token(TokenType.EOF, '', null, this.line));
     return this.tokens;
+  }
+
+  isDigit(char) {
+    return !isNaN(parseInt(char, 10));
+  }
+
+  parseNumber() {
+    while (this.isDigit(this.peek())) {
+      this.advance();
+    }
+    if (this.peek() === '.' && this.isDigit(this.peekNext())) {
+      this.advance();
+
+      while (this.isDigit(this.peek())) {
+        this.advance();
+      }
+    }
+    this.addToken(TokenType.NUMBER, this.src.substring(this.start, this.current));
   }
 
   // identify the token
@@ -85,6 +105,9 @@ class Scanner {
         this.line++;
         break;
       default:
+        if (this.isDigit(char)) {
+          this.parseNumber();
+        }
         // Lox.error(this.line, "Unexpected character");
         break;
     }
@@ -93,6 +116,11 @@ class Scanner {
   peek() {
     if (this.isAtEnd()) return '\0';
     return this.src.charAt(this.current);
+  }
+
+  peekNext() {
+    if (this.current + 1 > this.src.length) return '\0';
+    return this.src.charAt(this.current + 1);
   }
 
   match(expectedChar) {
